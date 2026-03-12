@@ -260,7 +260,8 @@
 
             <div class="footer-bottom">
                 <span>© {{ date('Y') }} {{ $siteName ?? 'Vaulted' }}. All rights reserved.</span>
-                <span class="powered-by">Powered by <span>brndng.</span></span>
+                <a href="https://brndnglb.com" target="_blank"> <span class="powered-by">Powered by
+                        <span>brndng.</span></span></a>
             </div>
         </div>
     </footer>
