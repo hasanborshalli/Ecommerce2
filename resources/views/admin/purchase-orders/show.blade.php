@@ -61,11 +61,9 @@
 </div>
 @endif
 
-<div style="display:grid;grid-template-columns:1fr 300px;gap:var(--sp-5);align-items:start">
-
+<div class="admin-grid-main-aside">
     {{-- LEFT: items table --}}
-    <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+    <div class="admin-stack-20">
         <div class="admin-card">
             <div class="admin-card-header">
                 <span class="admin-card-title">Line Items</span>
@@ -171,8 +169,7 @@
     </div>
 
     {{-- RIGHT: sidebar --}}
-    <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+    <div class="admin-stack-20">
         {{-- Summary --}}
         <div class="admin-card">
             <div class="admin-card-header"><span class="admin-card-title">Summary</span></div>

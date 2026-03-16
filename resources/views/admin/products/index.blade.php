@@ -43,12 +43,11 @@
     </a>
 </div>
 
-<div class="admin-table-wrap">
+<div class="admin-table-wrap table-stack-mobile">
 
     {{-- Toolbar --}}
     <div class="admin-table-header">
-        <form method="GET" action="{{ route('admin.products.index') }}"
-            style="display:flex;gap:var(--sp-2);flex:1;flex-wrap:wrap">
+        <form method="GET" action="{{ route('admin.products.index') }}" class="admin-toolbar-form">
             <div class="admin-search" style="max-width:260px">
                 <span class="admin-search-icon">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

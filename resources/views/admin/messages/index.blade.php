@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="admin-table-wrap">
+<div class="admin-table-wrap table-stack-mobile">
     <table class="admin-table">
         <thead>
             <tr>

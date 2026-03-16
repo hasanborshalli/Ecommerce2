@@ -15,8 +15,7 @@
 
 <div class="admin-card" style="margin-bottom:var(--sp-5)">
     <div class="admin-card-body">
-        <form method="GET" action="{{ route('admin.reports.categories') }}"
-            style="display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
+        <form method="GET" action="{{ route('admin.reports.categories') }}" class="admin-toolbar-form">
             @foreach(['7'=>'7 days','30'=>'30 days','90'=>'90 days'] as $val => $label)
             <a href="{{ route('admin.reports.categories', ['period' => $val]) }}"
                 class="abtn abtn-sm {{ $period == $val && !request('from') ? 'abtn-primary' : 'abtn-outline' }}">
@@ -42,7 +41,7 @@
 
 @php $grandTotal = $catData->sum('total_revenue'); @endphp
 
-<div class="admin-table-wrap">
+<div class="admin-table-wrap table-stack-mobile">
     <table class="admin-table">
         <thead>
             <tr>

@@ -17,8 +17,7 @@
 {{-- Date range filter --}}
 <div class="admin-card" style="margin-bottom:var(--sp-5)">
     <div class="admin-card-body">
-        <form method="GET" action="{{ route('admin.reports.sales') }}"
-            style="display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap">
+        <form method="GET" action="{{ route('admin.reports.sales') }}" class="admin-toolbar-form">
             <div style="display:flex;gap:var(--sp-2);align-items:center">
                 @foreach(['7'=>'7 days','30'=>'30 days','90'=>'90 days'] as $val => $label)
                 <a href="{{ route('admin.reports.sales', ['period' => $val]) }}"
@@ -79,7 +78,7 @@
 </div>
 
 {{-- Daily breakdown table --}}
-<div class="admin-table-wrap">
+<div class="admin-table-wrap table-stack-mobile">
     <div class="admin-table-header">
         <span style="font-weight:var(--weight-semibold);color:var(--admin-text)">Daily Breakdown</span>
     </div>

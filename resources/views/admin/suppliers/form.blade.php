@@ -15,9 +15,8 @@
     @csrf
     @if($editing) @method('PUT') @endif
 
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:var(--sp-5);align-items:start">
-
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+    <div class="admin-grid-main-aside">
+        <div class="admin-stack-20">
             <div class="admin-card">
                 <div class="admin-card-header"><span class="admin-card-title">Supplier Details</span></div>
                 <div class="admin-card-body">
@@ -64,15 +63,8 @@
             </div>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-            <div class="admin-card">
-                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
-                    <button type="submit" class="abtn abtn-blue abtn-full">
-                        {{ $editing ? 'Save Changes' : 'Create Supplier' }}
-                    </button>
-                    <a href="{{ route('admin.suppliers.index') }}" class="abtn abtn-outline abtn-full">Cancel</a>
-                </div>
-            </div>
+        <div class="admin-stack-20">
+
             <div class="admin-card">
                 <div class="admin-card-header"><span class="admin-card-title">Status</span></div>
                 <div class="admin-card-body">
@@ -85,6 +77,14 @@
                         </div>
                         <span class="toggle-label">Active supplier</span>
                     </label>
+                </div>
+            </div>
+            <div class="admin-card">
+                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
+                    <button type="submit" class="abtn abtn-blue abtn-full">
+                        {{ $editing ? 'Save Changes' : 'Create Supplier' }}
+                    </button>
+                    <a href="{{ route('admin.suppliers.index') }}" class="abtn abtn-outline abtn-full">Cancel</a>
                 </div>
             </div>
         </div>

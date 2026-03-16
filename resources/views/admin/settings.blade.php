@@ -9,11 +9,9 @@
 <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
     @csrf
 
-    <div style="display:grid;grid-template-columns:1fr 320px;gap:var(--sp-5);align-items:start">
-
+    <div class="admin-grid-main-aside">
         {{-- ── Left: settings sections ──────────────────── --}}
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+        <div class="admin-stack-20">
             {{-- Store info --}}
             <div class="admin-card">
                 <div class="admin-card-header"><span class="admin-card-title">Store Information</span></div>
@@ -194,8 +192,8 @@
                         </span>
                         <span style="font-size:var(--text-xs);color:var(--admin-muted)">PNG with transparency
                             recommended</span>
-                        <input type="file" id="site_logo" name="site_logo" accept="image/*" style="display:none"
-                            onchange="previewLogo(this)">
+                        <input type="file" id="site_logo" name="site_logo" class="aform-control file-input-compact"
+                            accept="image/*" style="display:none" onchange="previewLogo(this)">
                     </label>
 
                     <div class="aform-hint" style="margin-top:var(--sp-2)">

@@ -29,11 +29,9 @@
         const PRODUCTS = @json($productsJson);
     </script>
 
-    <div style="display:grid;grid-template-columns:1fr 320px;gap:var(--sp-5);align-items:start">
-
+    <div class="admin-grid-main-aside">
         {{-- LEFT --}}
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+        <div class="admin-stack-20">
             {{-- Line items --}}
             <div class="admin-card">
                 <div class="admin-card-header">
@@ -48,92 +46,97 @@
                     </button>
                 </div>
                 <div style="overflow-x:auto">
-                    <table class="po-items-table" id="itemsTable">
-                        <thead>
-                            <tr>
-                                <th class="col-product">Product</th>
-                                <th class="col-stock">Current Stock</th>
-                                <th class="col-qty">Qty to Order</th>
-                                <th class="col-cost">Cost / Unit ({{ $currencySymbol }})</th>
-                                <th class="col-total">Line Total</th>
-                                <th class="col-remove"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="itemsBody">
-                            @if($editing)
-                            @foreach($purchaseOrder->items as $i => $item)
-                            <tr class="item-row" data-index="{{ $i }}">
-                                <td class="col-product">
-                                    <select name="items[{{ $i }}][product_id]" class="product-select"
-                                        onchange="onProductChange(this, {{ $i }})" required>
-                                        <option value="">Choose product…</option>
-                                        @foreach($products as $p)
-                                        <option value="{{ $p->id }}" data-cost="{{ $p->cost_price }}"
-                                            data-stock="{{ $p->stock }}" {{ $item->product_id == $p->id ? 'selected' :
-                                            '' }}>
-                                            {{ $p->name }}{{ $p->sku ? ' — ' . $p->sku : '' }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td class="col-stock">
-                                    <span class="row-stock">
-                                        {{ $item->product->stock ?? 0 }}
-                                    </span>
-                                </td>
-                                <td class="col-qty">
-                                    <input type="number" name="items[{{ $i }}][qty]" class="row-qty"
-                                        value="{{ $item->quantity_ordered }}" min="1" required
-                                        oninput="recalcRow({{ $i }}); recalcTotal()">
-                                </td>
-                                <td class="col-cost">
-                                    <input type="number" name="items[{{ $i }}][cost]" class="row-cost"
-                                        value="{{ number_format($item->cost_per_unit, 2, '.', '') }}" min="0"
-                                        step="0.01" required oninput="recalcRow({{ $i }}); recalcTotal()">
-                                </td>
-                                <td class="col-total">
-                                    <span class="row-total">
-                                        {{ $currencySymbol }}{{ number_format($item->total_cost, 2) }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <button type="button" onclick="removeRow(this)"
-                                        style="background:none;border:none;cursor:pointer;color:var(--admin-muted);padding:4px">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <line x1="18" y1="6" x2="6" y2="18" />
-                                            <line x1="6" y1="6" x2="18" y2="18" />
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                        <tfoot>
-                            <tr id="emptyRow" {{ $editing && $purchaseOrder->items->count() ? 'style=display:none' : ''
-                                }}>
-                                <td colspan="6"
-                                    style="text-align:center;padding:var(--sp-8);color:var(--admin-muted);font-size:var(--text-sm)">
-                                    No products added yet — click <strong>Add Product</strong> above.
-                                </td>
-                            </tr>
-                            <tr style="border-top:2px solid var(--admin-border)">
-                                <td colspan="4"
-                                    style="text-align:right;font-weight:var(--weight-bold);padding:var(--sp-3)">
-                                    Order Total
-                                </td>
-                                <td
-                                    style="text-align:right;font-size:var(--text-xl);font-weight:var(--weight-black);color:var(--navy);padding:var(--sp-3)">
-                                    <span id="grandTotal">
-                                        {{ $currencySymbol }}{{ $editing ? number_format($purchaseOrder->total_cost, 2)
-                                        : '0.00' }}
-                                    </span>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="mobile-scroll-x">
+                        <table class="po-items-table" id="itemsTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-product">Product</th>
+                                    <th class="col-stock">Current Stock</th>
+                                    <th class="col-qty">Qty to Order</th>
+                                    <th class="col-cost">Cost / Unit ({{ $currencySymbol }})</th>
+                                    <th class="col-total">Line Total</th>
+                                    <th class="col-remove"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsBody">
+                                @if($editing)
+                                @foreach($purchaseOrder->items as $i => $item)
+                                <tr class="item-row" data-index="{{ $i }}">
+                                    <td class="col-product">
+                                        <select name="items[{{ $i }}][product_id]" class="product-select"
+                                            onchange="onProductChange(this, {{ $i }})" required>
+                                            <option value="">Choose product…</option>
+                                            @foreach($products as $p)
+                                            <option value="{{ $p->id }}" data-cost="{{ $p->cost_price }}"
+                                                data-stock="{{ $p->stock }}" {{ $item->product_id == $p->id ? 'selected'
+                                                :
+                                                '' }}>
+                                                {{ $p->name }}{{ $p->sku ? ' — ' . $p->sku : '' }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="col-stock">
+                                        <span class="row-stock">
+                                            {{ $item->product->stock ?? 0 }}
+                                        </span>
+                                    </td>
+                                    <td class="col-qty">
+                                        <input type="number" name="items[{{ $i }}][qty]" class="row-qty"
+                                            value="{{ $item->quantity_ordered }}" min="1" required
+                                            oninput="recalcRow({{ $i }}); recalcTotal()">
+                                    </td>
+                                    <td class="col-cost">
+                                        <input type="number" name="items[{{ $i }}][cost]" class="row-cost"
+                                            value="{{ number_format($item->cost_per_unit, 2, '.', '') }}" min="0"
+                                            step="0.01" required oninput="recalcRow({{ $i }}); recalcTotal()">
+                                    </td>
+                                    <td class="col-total">
+                                        <span class="row-total">
+                                            {{ $currencySymbol }}{{ number_format($item->total_cost, 2) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button type="button" onclick="removeRow(this)"
+                                            style="background:none;border:none;cursor:pointer;color:var(--admin-muted);padding:4px">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <line x1="18" y1="6" x2="6" y2="18" />
+                                                <line x1="6" y1="6" x2="18" y2="18" />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                            <tfoot>
+                                <tr id="emptyRow" {{ $editing && $purchaseOrder->items->count() ? 'style=display:none' :
+                                    ''
+                                    }}>
+                                    <td colspan="6"
+                                        style="text-align:center;padding:var(--sp-8);color:var(--admin-muted);font-size:var(--text-sm)">
+                                        No products added yet — click <strong>Add Product</strong> above.
+                                    </td>
+                                </tr>
+                                <tr style="border-top:2px solid var(--admin-border)">
+                                    <td colspan="4"
+                                        style="text-align:right;font-weight:var(--weight-bold);padding:var(--sp-3)">
+                                        Order Total
+                                    </td>
+                                    <td
+                                        style="text-align:right;font-size:var(--text-xl);font-weight:var(--weight-black);color:var(--navy);padding:var(--sp-3)">
+                                        <span id="grandTotal">
+                                            {{ $currencySymbol }}{{ $editing ? number_format($purchaseOrder->total_cost,
+                                            2)
+                                            : '0.00' }}
+                                        </span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -149,42 +152,9 @@
         </div>
 
         {{-- RIGHT --}}
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+        <div class="admin-stack-20">
             {{-- Save / Place Order --}}
-            <div class="admin-card">
-                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
 
-                    <button type="submit" name="status" value="ordered" class="abtn abtn-blue abtn-full abtn-lg">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                            <polyline points="22 4 12 14.01 9 11.01" />
-                        </svg>
-                        Place Order
-                    </button>
-
-                    <button type="submit" name="status" value="{{ $editing ? $purchaseOrder->status : 'draft' }}"
-                        class="abtn abtn-outline abtn-full">
-                        Save as Draft
-                    </button>
-
-                    <a href="{{ $editing ? route('admin.purchase_orders.show', $purchaseOrder) : route('admin.purchase_orders.index') }}"
-                        class="abtn abtn-ghost abtn-full">
-                        Cancel
-                    </a>
-
-                    @if($editing)
-                    <div style="border-top:1px solid var(--admin-border);padding-top:var(--sp-3)">
-                        <button type="button" class="abtn abtn-danger abtn-full abtn-sm"
-                            onclick="if(confirm('Delete this purchase order permanently?')) document.getElementById('deletePOForm').submit()">
-                            Delete Order
-                        </button>
-                    </div>
-                    @endif
-
-                </div>
-            </div>
 
             {{-- Order details --}}
             <div class="admin-card">
@@ -244,7 +214,39 @@
                 </div>
             </div>
             @endif
+            <div class="admin-card">
+                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
 
+                    <button type="submit" name="status" value="ordered" class="abtn abtn-blue abtn-full abtn-lg">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        Place Order
+                    </button>
+
+                    <button type="submit" name="status" value="{{ $editing ? $purchaseOrder->status : 'draft' }}"
+                        class="abtn abtn-outline abtn-full">
+                        Save as Draft
+                    </button>
+
+                    <a href="{{ $editing ? route('admin.purchase_orders.show', $purchaseOrder) : route('admin.purchase_orders.index') }}"
+                        class="abtn abtn-ghost abtn-full">
+                        Cancel
+                    </a>
+
+                    @if($editing)
+                    <div style="border-top:1px solid var(--admin-border);padding-top:var(--sp-3)">
+                        <button type="button" class="abtn abtn-danger abtn-full abtn-sm"
+                            onclick="if(confirm('Delete this purchase order permanently?')) document.getElementById('deletePOForm').submit()">
+                            Delete Order
+                        </button>
+                    </div>
+                    @endif
+
+                </div>
+            </div>
         </div>
     </div>
 </form>

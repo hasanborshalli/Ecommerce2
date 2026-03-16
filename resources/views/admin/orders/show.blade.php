@@ -30,11 +30,9 @@
     </div>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 320px;gap:var(--sp-5);align-items:start">
-
+<div class="admin-grid-main-aside">
     {{-- ── Left: items + profit ─────────────────────────── --}}
-    <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+    <div class="admin-stack-20">
         {{-- Items table --}}
         <div class="admin-card">
             <div class="admin-card-header">
@@ -153,7 +151,7 @@
                 <span style="font-size:var(--text-xs);color:var(--admin-muted)">Costs frozen at time of sale</span>
             </div>
             <div class="admin-card-body">
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)">
+                <div class="admin-grid-3">
                     <div
                         style="background:var(--admin-bg);border-radius:var(--radius-lg);padding:var(--sp-4);text-align:center">
                         <div
@@ -204,8 +202,7 @@
     </div>
 
     {{-- ── Right sidebar ─────────────────────────────────── --}}
-    <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+    <div class="admin-stack-20">
         {{-- Status control --}}
         <div class="admin-card">
             <div class="admin-card-header"><span class="admin-card-title">Order Status</span></div>

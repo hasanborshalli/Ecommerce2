@@ -27,10 +27,7 @@
     <div class="admin-layout">
 
         {{-- ── Sidebar overlay (mobile) ──────────────────────── --}}
-        <div class="admin-sidebar-overlay" id="adminOverlay"
-            style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199" onclick="closeSidebar()">
-        </div>
-
+        <div class="admin-sidebar-overlay" id="adminOverlay" onclick="closeSidebar()"></div>
         {{-- ── Sidebar ─────────────────────────────────────────── --}}
         <aside class="admin-sidebar" id="adminSidebar">
 
@@ -230,13 +227,11 @@
             <header class="admin-topbar">
                 <div style="display:flex;align-items:center;gap:var(--sp-3)">
                     {{-- Mobile toggle --}}
-                    <button onclick="toggleSidebar()"
-                        style="display:none;background:none;border:none;cursor:pointer;padding:var(--sp-2);color:var(--admin-muted)"
-                        id="sidebarToggle" aria-label="Toggle sidebar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <line x1="3" y1="12" x2="21" y2="12" />
+                    <button type="button" class="admin-mobile-toggle" id="sidebarToggle" onclick="toggleSidebar()"
+                        aria-label="Toggle sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="12" x2="21" y2="12" />
                             <line x1="3" y1="18" x2="21" y2="18" />
                         </svg>
                     </button>
@@ -288,62 +283,39 @@
     </div>{{-- /admin-layout --}}
 
     {{-- ── Admin JS ──────────────────────────────────────────── --}}
+    @stack('scripts')
+
     <script>
-        (function() {
-    const sidebar   = document.getElementById('adminSidebar');
-    const overlay   = document.getElementById('adminOverlay');
-    const toggle    = document.getElementById('sidebarToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+    const adminOverlay = document.getElementById('adminOverlay');
 
-    // Show toggle on mobile
-    function checkMobile() {
-        const isMobile = window.innerWidth <= 900;
-        if (toggle) toggle.style.display = isMobile ? 'flex' : 'none';
+    function openSidebar() {
+        adminSidebar.classList.add('open');
+        adminOverlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
     }
-    window.addEventListener('resize', checkMobile);
-    checkMobile();
 
-    window.toggleSidebar = function() {
-        sidebar?.classList.toggle('open');
-        if (overlay) overlay.style.display = sidebar?.classList.contains('open') ? 'block' : 'none';
-        document.body.style.overflow = sidebar?.classList.contains('open') ? 'hidden' : '';
-    };
-
-    window.closeSidebar = function() {
-        sidebar?.classList.remove('open');
-        if (overlay) overlay.style.display = 'none';
+    function closeSidebar() {
+        adminSidebar.classList.remove('open');
+        adminOverlay.classList.remove('show');
         document.body.style.overflow = '';
-    };
+    }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeSidebar();
+    function toggleSidebar() {
+        if (adminSidebar.classList.contains('open')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) {
+            closeSidebar();
+        }
     });
-
-    // CSRF helper for fetch calls
-    window.csrfToken = () =>
-        document.querySelector('meta[name="csrf-token"]')?.content ?? '';
-
-    // Admin toast
-    window.showAdminToast = function(msg, type) {
-        const color = type === 'error' ? 'var(--danger)' : 'var(--success)';
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-            position:fixed;bottom:24px;right:24px;z-index:99999;
-            background:var(--navy);color:#fff;
-            padding:12px 20px;border-radius:8px;
-            font-size:14px;font-weight:500;
-            box-shadow:0 10px 25px rgba(0,0,0,0.2);
-            display:flex;align-items:center;gap:8px;
-            animation:slideUp .25s ease;
-            border-left:3px solid ${color};
-        `;
-        toast.innerHTML = `<span>${msg}</span>`;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    };
-})();
     </script>
 
-    @stack('scripts')
 </body>
 
 </html>

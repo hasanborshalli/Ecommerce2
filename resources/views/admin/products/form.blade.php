@@ -37,11 +37,9 @@
     </div>
     @endif
 
-    <div style="display:grid;grid-template-columns:1fr 340px;gap:var(--sp-5);align-items:start">
-
+    <div class="admin-grid-main-aside-wide">
         {{-- ── Left column ──────────────────────────────── --}}
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+        <div class="admin-stack-20">
             {{-- Basic info --}}
             <div class="admin-card">
                 <div class="admin-card-header"><span class="admin-card-title">Product Information</span></div>
@@ -128,7 +126,7 @@
 
                     {{-- Live margin preview --}}
                     <div id="marginPreview"
-                        style="display:none;background:var(--admin-bg);border-radius:var(--radius);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);display:flex;gap:var(--sp-6)">
+                        style="display:none;background:var(--admin-bg);border-radius:var(--radius);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);flex-wrap:wrap;gap:var(--sp-4)">
                         <span>Profit: <strong id="profitVal" style="color:var(--success)">—</strong></span>
                         <span>Margin: <strong id="marginVal" style="color:var(--success)">—</strong></span>
                     </div>
@@ -182,29 +180,9 @@
         </div>
 
         {{-- ── Right column ──────────────────────────────── --}}
-        <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
+        <div class="admin-stack-20">
             {{-- Actions --}}
-            <div class="admin-card">
-                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
-                    <button type="submit" class="abtn abtn-blue abtn-full abtn-lg">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
-                            <polyline points="17 21 17 13 7 13 7 21" />
-                            <polyline points="7 3 7 8 15 8" />
-                        </svg>
-                        {{ $editing ? 'Save Changes' : 'Create Product' }}
-                    </button>
-                    <a href="{{ route('admin.products.index') }}" class="abtn abtn-outline abtn-full">Cancel</a>
-                    @if($editing)
-                    <a href="{{ route('product.show', $product->slug) }}" target="_blank"
-                        class="abtn abtn-ghost abtn-full" style="font-size:var(--text-xs)">
-                        View on store ↗
-                    </a>
-                    @endif
-                </div>
-            </div>
+
 
             {{-- Category + status --}}
             <div class="admin-card">
@@ -307,8 +285,8 @@
                             {{ $editing && $product->main_image ? 'Replace image' : 'Upload image' }}
                         </span>
                         <span style="font-size:var(--text-xs);color:var(--admin-muted)">PNG, JPG up to 4MB</span>
-                        <input type="file" id="main_image" name="main_image" accept="image/*" style="display:none"
-                            onchange="previewMain(this)">
+                        <input type="file" id="main_image" name="main_image" class="aform-control file-input-compact"
+                            accept="image/*" style="display:none" onchange="previewMain(this)">
                         @error('main_image') <span class="aform-error">{{ $message }}</span> @enderror
                     </label>
                 </div>
@@ -361,7 +339,26 @@
                     </label>
                 </div>
             </div>
-
+            <div class="admin-card">
+                <div class="admin-card-body" style="display:flex;flex-direction:column;gap:var(--sp-3)">
+                    <button type="submit" class="abtn abtn-blue abtn-full abtn-lg">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                            <polyline points="17 21 17 13 7 13 7 21" />
+                            <polyline points="7 3 7 8 15 8" />
+                        </svg>
+                        {{ $editing ? 'Save Changes' : 'Create Product' }}
+                    </button>
+                    <a href="{{ route('admin.products.index') }}" class="abtn abtn-outline abtn-full">Cancel</a>
+                    @if($editing)
+                    <a href="{{ route('product.show', $product->slug) }}" target="_blank"
+                        class="abtn abtn-ghost abtn-full" style="font-size:var(--text-xs)">
+                        View on store ↗
+                    </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </form>
