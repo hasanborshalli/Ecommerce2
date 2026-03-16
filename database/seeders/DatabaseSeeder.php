@@ -72,14 +72,14 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        // ── Categories ───────────────────────────────────────────────
+            // ── Categories ───────────────────────────────────────────────
         $categories = [
-            ['name' => 'Apparel',      'slug' => 'apparel',      'sort_order' => 1],
-            ['name' => 'Footwear',     'slug' => 'footwear',     'sort_order' => 2],
-            ['name' => 'Accessories',  'slug' => 'accessories',  'sort_order' => 3],
-            ['name' => 'Tech Gear',    'slug' => 'tech-gear',    'sort_order' => 4],
-            ['name' => 'Bags',         'slug' => 'bags',         'sort_order' => 5],
-            ['name' => 'New Arrivals', 'slug' => 'new-arrivals', 'sort_order' => 6],
+            ['name' => 'T-Shirts',  'slug' => 't-shirts',  'sort_order' => 1],
+            ['name' => 'Hoodies',   'slug' => 'hoodies',   'sort_order' => 2],
+            ['name' => 'Caps',      'slug' => 'caps',      'sort_order' => 3],
+            ['name' => 'Mugs',      'slug' => 'mugs',      'sort_order' => 4],
+            ['name' => 'Jackets',   'slug' => 'jackets',   'sort_order' => 5],
+            ['name' => 'Featured',  'slug' => 'featured',  'sort_order' => 6],
         ];
 
         $categoryMap = [];
@@ -109,120 +109,141 @@ class DatabaseSeeder extends Seeder
 
         // ── Products ─────────────────────────────────────────────────
         $products = [
-            // Apparel
+            // T-Shirts
             [
-                'category'    => 'apparel',
-                'name'        => 'Merino Performance Tee',
-                'price'       => 89.00,
+                'category'    => 't-shirts',
+                'name'        => 'Heather Grey Logo T-Shirt',
+                'price'       => 32.00,
+                'cost_price'  => 10.00,
+                'stock'       => 60,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL', 'XXL'],
+                    'Color' => ['Heather Grey']
+                ],
+                'is_featured' => true,
+                'is_new'      => true,
+            ],
+            [
+                'category'    => 't-shirts',
+                'name'        => 'Charcoal Chest Logo T-Shirt',
+                'price'       => 30.00,
+                'cost_price'  => 9.00,
+                'stock'       => 55,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL'],
+                    'Color' => ['Charcoal']
+                ],
+                'is_featured' => true,
+            ],
+
+            // Hoodies
+            [
+                'category'    => 'hoodies',
+                'name'        => 'Charcoal Logo Hoodie',
+                'price'       => 79.00,
                 'cost_price'  => 28.00,
-                'stock'       => 42,
-                'variants'    => ['Size' => ['XS','S','M','L','XL'], 'Color' => ['Navy','White','Slate']],
+                'stock'       => 30,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL', 'XXL'],
+                    'Color' => ['Charcoal']
+                ],
                 'is_featured' => true,
                 'is_new'      => true,
             ],
             [
-                'category'   => 'apparel',
-                'name'       => 'Technical Jogger',
-                'price'      => 119.00,
-                'cost_price' => 38.00,
-                'stock'      => 28,
-                'variants'   => ['Size' => ['S','M','L','XL'], 'Color' => ['Black','Olive']],
-                'is_featured'=> true,
+                'category'    => 'hoodies',
+                'name'        => 'Heather Grey Logo Hoodie',
+                'price'       => 75.00,
+                'cost_price'  => 27.00,
+                'stock'       => 28,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL'],
+                    'Color' => ['Heather Grey']
+                ],
+                'is_featured' => true,
             ],
+
+            // Caps
             [
-                'category'   => 'apparel',
-                'name'       => 'Structured Quarter-Zip',
-                'price'      => 145.00,
-                'cost_price' => 48.00,
-                'stock'      => 15,
-                'variants'   => ['Size' => ['S','M','L','XL','XXL'], 'Color' => ['Charcoal','Navy']],
-                'is_on_sale' => true,
-                'sale_price' => 109.00,
+                'category'    => 'caps',
+                'name'        => 'Embroidered Logo Cap',
+                'price'       => 29.00,
+                'cost_price'  => 9.00,
+                'stock'       => 50,
+                'variants'    => [
+                    'Size'  => ['One Size'],
+                    'Color' => ['Grey']
+                ],
+                'is_featured' => true,
+                'is_new'      => true,
             ],
-            // Footwear
+
+            // Mugs
             [
-                'category'    => 'footwear',
-                'name'        => 'Trail Runner Pro',
-                'price'       => 165.00,
-                'cost_price'  => 55.00,
+                'category'    => 'mugs',
+                'name'        => 'Ceramic Logo Mug',
+                'price'       => 18.00,
+                'cost_price'  => 5.50,
+                'stock'       => 80,
+                'variants'    => [
+                    'Size'  => ['11oz'],
+                    'Color' => ['White']
+                ],
+                'is_featured' => true,
+            ],
+
+            // Jackets
+            [
+                'category'    => 'jackets',
+                'name'        => 'Charcoal Logo Bomber Jacket',
+                'price'       => 110.00,
+                'cost_price'  => 42.00,
+                'stock'       => 18,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL'],
+                    'Color' => ['Charcoal']
+                ],
+                'is_featured' => true,
+                'is_new'      => true,
+            ],
+
+            // Featured / extra demo items based on same brand style
+            [
+                'category'    => 'featured',
+                'name'        => 'Minimal Logo Hoodie',
+                'price'       => 72.00,
+                'cost_price'  => 26.00,
                 'stock'       => 20,
-                'variants'    => ['Size' => ['40','41','42','43','44','45'], 'Color' => ['Black/Grey','Blue/White']],
-                'is_featured' => true,
-                'is_new'      => true,
-            ],
-            [
-                'category'   => 'footwear',
-                'name'       => 'Everyday Leather Sneaker',
-                'price'      => 195.00,
-                'cost_price' => 68.00,
-                'stock'      => 12,
-                'variants'   => ['Size' => ['40','41','42','43','44'], 'Color' => ['White','Tan','Black']],
-            ],
-            // Accessories
-            [
-                'category'   => 'accessories',
-                'name'       => 'Merino Beanie',
-                'price'      => 45.00,
-                'cost_price' => 12.00,
-                'stock'      => 60,
-                'variants'   => ['Color' => ['Black','Navy','Oatmeal','Forest']],
-                'is_featured'=> true,
-            ],
-            [
-                'category'   => 'accessories',
-                'name'       => 'Leather Card Wallet',
-                'price'      => 65.00,
-                'cost_price' => 18.00,
-                'stock'      => 35,
-                'variants'   => ['Color' => ['Black','Tan','Cognac']],
-                'is_new'     => true,
-            ],
-            // Tech Gear
-            [
-                'category'    => 'tech-gear',
-                'name'        => 'Wireless Charging Pad',
-                'price'       => 55.00,
-                'cost_price'  => 16.00,
-                'stock'       => 40,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL'],
+                    'Color' => ['Ash Grey', 'Charcoal']
+                ],
                 'is_featured' => true,
             ],
             [
-                'category'   => 'tech-gear',
-                'name'       => 'Noise-Cancelling Earbuds',
-                'price'      => 189.00,
-                'cost_price' => 62.00,
-                'stock'      => 18,
-                'variants'   => ['Color' => ['Matte Black','Pearl White']],
-                'is_new'     => true,
-                'is_featured'=> true,
-            ],
-            // Bags
-            [
-                'category'   => 'bags',
-                'name'       => 'Technical Backpack 25L',
-                'price'      => 210.00,
-                'cost_price' => 72.00,
-                'stock'      => 10,
-                'variants'   => ['Color' => ['Black','Navy','Olive']],
-                'is_featured'=> true,
-            ],
-            [
-                'category'    => 'bags',
-                'name'        => 'Commuter Tote',
-                'price'       => 135.00,
-                'cost_price'  => 44.00,
-                'stock'       => 22,
-                'variants'    => ['Color' => ['Black','Sand']],
+                'category'    => 'featured',
+                'name'        => 'Studio Coffee Mug',
+                'price'       => 20.00,
+                'cost_price'  => 6.00,
+                'stock'       => 45,
+                'variants'    => [
+                    'Size'  => ['11oz', '15oz'],
+                    'Color' => ['White']
+                ],
                 'is_new'      => true,
             ],
             [
-                'category'   => 'bags',
-                'name'       => 'Packable Day Pack',
-                'price'      => 79.00,
-                'cost_price' => 24.00,
-                'stock'      => 3,   // intentionally low stock
-                'is_on_sale' => true,
-                'sale_price' => 59.00,
+                'category'    => 'featured',
+                'name'        => 'Essential Logo Tee',
+                'price'       => 28.00,
+                'cost_price'  => 8.50,
+                'stock'       => 24,
+                'variants'    => [
+                    'Size'  => ['S', 'M', 'L', 'XL'],
+                    'Color' => ['Heather Grey', 'Charcoal']
+                ],
+                'is_on_sale'  => true,
+                'sale_price'  => 22.00,
             ],
         ];
 
@@ -306,7 +327,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Nour Haddad',   'email' => 'nour@email.com',   'city' => 'Houston',      'days' => 12, 'items' => [9, 1]],
             ['name' => 'Sophie Martin', 'email' => 'sophie@email.com', 'city' => 'Miami',        'days' => 15, 'items' => [0, 4]],
             ['name' => 'David Kim',     'email' => 'david@email.com',  'city' => 'Seattle',      'days' => 18, 'items' => [2]],
-            ['name' => 'Layla Hassan',  'email' => 'layla@email.com',  'city' => 'Dallas',       'days' => 22, 'items' => [10, 5]],
+            ['name' => 'Layla Hassan',  'email' => 'layla@email.com',  'city' => 'Dallas',       'days' => 22, 'items' => [9, 5]],
         ];
 
         foreach ($orderData as $od) {
